@@ -1,0 +1,79 @@
+<html>
+<head>
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+       
+<script>
+    
+    var arr=[];
+    function preload() {
+  mySound = loadSound('Minion Beat Music.mp3');
+}
+    function setup(){
+ cnv=createCanvas(windowWidth,windowHeight);
+        amplitude=new p5.Amplitude();
+cnv.mouseClicked(
+    function() {
+    if (mySound.isPlaying() ){
+      mySound.stop();
+    } else {
+      mySound.play();
+    }
+  });
+  for(var i=0;i<50;i++){
+      for(var j=0;j<50;j++){
+          arr.push(new Dart(60*i,60*j,2));
+      }
+     
+  }
+      mySound.setVolume(0.1);
+     
+       
+    }
+    function draw(){
+        background(0);
+        fill(random(255),random(255),random(255));
+        var level=amplitude.getLevel();
+        var size=map(level,0,1,0,200);
+        ellipse(width/2,height/2,size,size);
+       for(var k=0;k<arr.length;k++){
+           arr[k].update();
+       }
+    }
+    function Dart(x,y,length){
+        this.x=x;
+        this.y=y;
+        this.length=length;
+        this.update=function(){
+        var angle = atan2(mouseY-this.y,mouseX-this.x);
+        push();
+        translate(this.x,this.y);
+        rotate(angle);
+    beginShape();
+        vertex(0,2*this.length);
+        vertex(16*this.length,-4*this.length);
+        vertex(20*this.length,-20*this.length);
+        vertex(25*this.length,-4*this.length);
+        vertex(40*this.length,0);
+        vertex(25*this.length,4*this.length);
+        vertex(21*this.length,20*this.length);
+        vertex(16*this.length,4*this.length);
+        vertex(0,2*this.length);
+        endShape(CLOSE);
+            pop();
+    }
+    }
+    //function mousePressed() {
+  //if (mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+  //mySound.play();
+ // }
+//}
+    </script>
+  
+</head>
+
+<body>
+  
+</body>
+</html>

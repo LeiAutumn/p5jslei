@@ -1,0 +1,32 @@
+<html>
+<head>
+  <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
+       <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+    
+<script>
+function preload() {
+  mySound = loadSound('The Rose.mp3');
+}
+
+function setup() {
+  createCanvas(100, 100);
+  background(0, 255, 0);
+textAlign(CENTER);
+  text('click here to play', width/2, height/2);
+mySound.setVolume(0.1);
+}
+function mousePressed() {
+  if (mouseX < width && mouseY < height && mouseX > 0 && mouseY > 0) {
+    mySound.play();
+  }
+}
+
+    </script>
+  
+</head>
+
+<body>
+
+</body>
+</html>
